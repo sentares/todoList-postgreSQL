@@ -1,0 +1,56 @@
+.todoItem {
+	margin-bottom: 10px;
+	width: 100%;
+	border-radius: 8px;
+	padding: 15px;
+	align-items: center;
+	display: flex;
+	border: 1px solid rgb(136, 50, 50);
+	justify-content: space-between;
+	box-shadow: -3px 3px 8px 0px rgba(133,0,0,0.75);
+	-webkit-box-shadow: -3px 3px 8px 0px rgba(133,0,0,0.75);
+	-moz-box-shadow: -3px 3px 8px 0px rgba(133,0,0,0.75);
+  transition: all .2s ease-in-out;
+
+}
+.todoItem:hover {
+  transform: scale(1.02);
+	background-color: rgb(16, 16, 16);
+}
+ 
+.title {
+	font-size: 20px;
+}
+
+.checkPoint {
+	gap: 1px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-right: 5px;
+}
+
+.checkTrue {
+	font-size: 24px;
+	color: rgb(37, 159, 37);
+}
+
+.checkFalse {
+	font-size: 24px;
+	color: gray;
+}
+
+.checkFalse:hover{
+	color: rgb(17, 68, 17);
+}
+
+.trash {
+	color: gray;
+	font-size: 20px;
+}
+
+.trash :hover {
+	border: 1px;
+	color: rgb(168, 44, 44);
+}
+

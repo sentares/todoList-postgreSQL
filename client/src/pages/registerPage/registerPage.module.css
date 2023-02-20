@@ -1,0 +1,57 @@
+.registerPage {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.registerBlock {
+	margin-top: -90px;
+}
+
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.iconPh {
+	color: white;
+	font-size: 42px;
+	margin-bottom: 20px;
+}
+
+/* .registerInputs {
+} */
+
+.inputBlock {
+	margin-bottom: 10px;
+}
+
+.registerInput {
+	padding: 12px;
+}
+
+.buttonRegister {
+	padding: 10px;
+	margin-left: 0;
+	width: 100%;
+	margin-top: 12px;
+	color: white;
+	background-color: rgb(51, 172, 40);
+}
+
+.haveAcc {
+	margin-top: 24px;
+}
+
+.acc {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	font-size: 24px;
+}
+
+.signIn {
+	color: rgb(88, 88, 186);
+}

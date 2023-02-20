@@ -1,0 +1,9 @@
+{
+  "name": "full-stack-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.8.4"
+  }
+}

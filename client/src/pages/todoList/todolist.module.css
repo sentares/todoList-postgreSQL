@@ -1,0 +1,84 @@
+.todoList {
+	max-width: 1190px;
+	width: 100%;
+}
+
+.info {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.text {
+	color: white;
+}
+
+.inputBlock {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+input {
+	padding: 5px 15px;
+	border: 1px solid rgb(175, 174, 174);
+	border-radius: 8px;
+	background-color: rgb(240, 240, 240);
+	font-size: 24px;
+	color: black;
+	width: 420px;
+}
+
+button {
+	margin-left: 25px;
+	padding: 5px 15px;
+	border-radius: 5px;
+	background-color: rgb(240, 240, 240);
+	font-size: 24px;
+	color: black;
+	cursor: pointer;
+	border: 0;
+}
+
+h2 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.todos {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.todoIt {
+	width: 500px;
+}
+
+.emptyPosts {
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 38px;
+}
+
+.loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.sighInBlock {
+	position: absolute;
+	top: 5%;
+	right: 5%;
+}
+
+.buttonSignIn {
+	padding: 5px;
+	color: white;
+	background-color: rgb(110, 159, 110);
+}
