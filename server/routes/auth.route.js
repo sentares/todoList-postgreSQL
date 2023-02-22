@@ -5,7 +5,7 @@ const router = Router()
 
 router.post('/login', AuthController.login)
 router.post('/register', AuthController.register)
-router.post('/check', AuthController.check)
-router.post('/logout')
+router.get('/check', AuthController.check)
+router.get('/logout', AuthController.logout)
 
 module.exports = router
