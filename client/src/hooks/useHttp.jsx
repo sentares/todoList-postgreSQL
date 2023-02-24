@@ -1,20 +1,27 @@
-import React from "react";
+import React from 'react'
+import axios from 'axios'
 
-const baseUrl = 'http://localhost:4000/api'
+const baseURL = 'http://localhost:5000/api'
+
+const api = axios.create({
+	baseURL,
+	withCredentials: true,
+	validateStatus: status => {
+		if (status >= 500) {
+			return false
+		}
+		return true
+	}
+})
 
 export const useHttp = () => {
 	const [loader, setLoader] = React.useState(false)
 
-	const request = React.useCallback(async (url, method = 'GET', body = null, headers = {}) => {
+	const request = React.useCallback(async (url, method = 'GET', body = {}) => {
 		try {
 			setLoader(true)
-			if (body) {
-				body = JSON.stringify(body)
-				headers['Content-Type'] = 'application/json'
-			}
- 			const res = await fetch(baseUrl + url, {method, headers, body})
-			
-			return await res.json()
+			const { data } = await api[method.toLowerCase()](url, body)
+			return data
 		} catch (e) {
 			console.log(e)
 		} finally {
@@ -22,5 +29,5 @@ export const useHttp = () => {
 		}
 	}, [])
 
-	return {loader, request}
+	return { loader, request }
 }

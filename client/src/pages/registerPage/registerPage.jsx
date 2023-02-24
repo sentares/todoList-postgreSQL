@@ -1,25 +1,44 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './registerPage.module.css';
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import styles from './registerPage.module.css'
+import { toast } from 'react-toastify'
+import { useHttp } from '../../hooks/useHttp.jsx'
 
 export const RegisterPage = () => {
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const navigate = useNavigate()
+	const { request, loader } = useHttp()
+	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
 
-	const handleRegister = async () => {};
+	const handleRegister = async e => {
+		e.preventDefault()
+		if (name.trim().length && email.trim().length && password.trim().length) {
+			const { register, message, type } = await request('/auth/register', 'POST', {
+				email: email.trim(),
+				password: password.trim(),
+				name: name.trim()
+			})
+			toast[type](message)
+			if (register) {
+				navigate('/login')
+			}
+			return
+		}
+		toast.warn('Заполните пустые поля')
+	}
 
 	const changeName = e => {
-		setName(e.target.value);
-	};
+		setName(e.target.value)
+	}
 
 	const changeEmail = e => {
-		setEmail(e.target.value);
-	};
+		setEmail(e.target.value)
+	}
 
 	const changePassword = e => {
-		setPassword(e.target.value);
-	};
+		setPassword(e.target.value)
+	}
 	return (
 		<div className={styles.registerPage}>
 			<div className={styles.registerBlock}>
@@ -40,7 +59,9 @@ export const RegisterPage = () => {
 							<input type='password' className={styles.registerInput} placeholder='Ваш пароль' value={password} onChange={changePassword} />
 						</div>
 
-						<button className={styles.buttonRegister}>Регистрация</button>
+						<button className={styles.buttonRegister} onClick={handleRegister}>
+							Регистрация
+						</button>
 						<div className={styles.haveAcc}>
 							<p className={styles.acc}>
 								Есть аккаунт?
@@ -53,5 +74,5 @@ export const RegisterPage = () => {
 				</form>
 			</div>
 		</div>
-	);
-};
+	)
+}

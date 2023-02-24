@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const db = require('../db/db');
+const db = require('../db/db')
 
 class AuthController {
 	async login(req, res) {
 		try {
 			const data = req.body
 
-			const {rows} = await db.query('select * from users where email=$1', [data.email])
+			const { rows } = await db.query('select * from users where email=$1', [data.email])
 
 			if (!rows.length) {
 				return res.status(303).json({
@@ -18,7 +18,7 @@ class AuthController {
 				})
 			}
 
-			const {name, password, email, id_user} = await rows[0]
+			const { name, password, email, id_user } = await rows[0]
 
 			const isPassword = await bcrypt.compare(data.password, password)
 
@@ -31,52 +31,57 @@ class AuthController {
 				})
 			}
 
-			const token = jwt.sign({name, email, id_user}, process.env.SECRET_KEY)
+			const token = jwt.sign({ name, email, id_user }, process.env.SECRET_KEY)
 
-			res.status(202).cookie('token', token, {httpOnly: true, maxAge: 100 * 60 * 60 * 24 * 30}).json({
-				message: 'Авторизация прошла успешно',
-				type: 'sucess',
-				data: {name, email, id_user},
-				accessToken: token
-			})
-		}catch (e) {
-			console.log(e);
+			res.status(202)
+				.cookie('token', token, { httpOnly: true, maxAge: 100 * 60 * 60 * 24 * 30 })
+				.json({
+					message: 'Авторизация прошла успешно',
+					type: 'success',
+					data: { name, email, id_user },
+					accessToken: token
+				})
+		} catch (e) {
+			console.log(e)
 		}
 	}
 
 	async register(req, res) {
 		try {
-			const {name, password, email} = req.body
+			const { name, password, email } = req.body
 
-			const {rows} = await db.query('select * from users where email=$1', [email])
+			const { rows } = await db.query('select * from users where email=$1', [email])
 
 			if (rows.length) {
 				return res.status(303).json({
 					message: `Пользователь с такой ${email} эл.почтой уже регистрировон`,
 					type: 'warn',
-					data: []
+					data: [],
+					register: false
 				})
 			}
 
 			const hashPassword = await bcrypt.hash(password, 12)
 
-			const {rows: arrId} = await db.query('insert into users (email, password, name) values ($1, $2, $3) returning id_user', [email, hashPassword, name])
+			const { rows: arrId } = await db.query('insert into users (email, password, name) values ($1, $2, $3) returning id_user', [email, hashPassword, name])
 
 			if (arrId.length) {
 				return res.status(201).json({
 					message: 'Вы успешно зарегистированы',
 					type: 'success',
-					data: []
+					data: [],
+					register: true
 				})
 			}
 
 			return res.status(404).json({
 				message: 'Ошибка в регистрации',
 				type: 'error',
-				data: []
+				data: [],
+				register: false
 			})
 		} catch (e) {
-			console.log(e);
+			console.log(e)
 			res.status(500).json({
 				message: 'Ошибка в сервер',
 				type: 'error',
@@ -87,26 +92,27 @@ class AuthController {
 
 	async check(req, res) {
 		try {
-			const {token} = req.cookies
+			const { token } = req.cookies
 
 			if (!token) {
 				return res.status(303).json({
 					message: 'Вы не авторизованы',
 					type: 'warn',
-					data: {}
+					data: {},
+					accessToken: ''
 				})
 			}
 
-			const {name, email, id_user} = jwt.verify(token, process.env.SECRET_KEY)
+			const { name, email, id_user } = jwt.verify(token, process.env.SECRET_KEY)
 
 			res.status(202).json({
 				message: 'Вы авторизованы',
 				type: 'success',
-				data: {name, email, id_user},
+				data: { name, email, id_user },
 				accessToken: token
 			})
 		} catch (e) {
-			console.log(e);
+			console.log(e)
 		}
 	}
 
@@ -118,9 +124,9 @@ class AuthController {
 				data: {}
 			})
 		} catch (e) {
-			console.log(e);
+			console.log(e)
 		}
 	}
 }
 
-module.exports = new AuthController();
+module.exports = new AuthController()
