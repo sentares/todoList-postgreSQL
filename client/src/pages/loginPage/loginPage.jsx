@@ -33,11 +33,6 @@ export const LoginPage = () => {
 	return (
 		<div className={styles.registerPage}>
 			<div className={styles.registerBlock}>
-				{/* <Link to='/'>
-					<div className={styles.icon}>
-						<AiFillHome className={styles.iconPh} />
-					</div>
-				</Link> */}
 				<form>
 					<div className={styles.registerInputs}>
 						<div className={styles.inputBlock}>

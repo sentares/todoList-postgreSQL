@@ -11,8 +11,15 @@ export const RegisterPage = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
+	const [form, setForm] = useState({
+		email: '',
+		name: '',
+		password: ''
+	})
+
 	const handleRegister = async e => {
 		e.preventDefault()
+		const { name, email, password } = form
 		if (name.trim().length && email.trim().length && password.trim().length) {
 			const { register, message, type } = await request('/auth/register', 'POST', {
 				email: email.trim(),
@@ -28,35 +35,33 @@ export const RegisterPage = () => {
 		toast.warn('Заполните пустые поля')
 	}
 
-	const changeName = e => {
-		setName(e.target.value)
-	}
+	// const changeName = e => {
+	// 	setName(e.target.value)
+	// }
 
-	const changeEmail = e => {
-		setEmail(e.target.value)
-	}
+	// const changeEmail = e => {
+	// 	setEmail(e.target.value)
+	// }
 
-	const changePassword = e => {
-		setPassword(e.target.value)
-	}
+	// const changePassword = e => {
+	// 	setPassword(e.target.value)
+	// }
+
+	const change = e => setForm({ ...form, [e.target.name]: e.target.value })
+
 	return (
 		<div className={styles.registerPage}>
 			<div className={styles.registerBlock}>
-				{/* <Link to='/'>
-					<div className={styles.icon}>
-						<AiFillHome className={styles.iconPh} />
-					</div>
-				</Link> */}
 				<form onSubmit={handleRegister}>
 					<div className={styles.registerInputs}>
 						<div className={styles.inputBlock}>
-							<input type='text' className={styles.registerInput} placeholder='Ваше имя' value={name} onChange={changeName} />
+							<input type='text' name='name' className={styles.registerInput} placeholder='Ваше имя' value={form.name} onChange={change} />
 						</div>
 						<div className={styles.inputBlock}>
-							<input type='email' className={styles.registerInput} placeholder='Ваш email' value={email} onChange={changeEmail} />
+							<input type='email' name='email' className={styles.registerInput} placeholder='Ваш email' value={form.email} onChange={change} />
 						</div>
 						<div className={styles.inputBlock}>
-							<input type='password' className={styles.registerInput} placeholder='Ваш пароль' value={password} onChange={changePassword} />
+							<input type='password' name='password' className={styles.registerInput} placeholder='Ваш пароль' value={form.password} onChange={change} />
 						</div>
 
 						<button className={styles.buttonRegister} onClick={handleRegister}>

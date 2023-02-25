@@ -3,6 +3,7 @@ import Router from './pages/Router.jsx'
 import { ToastContainer } from 'react-toastify'
 import { AppContext } from './hooks/Contex.jsx'
 import { useHttp } from './hooks/useHttp.jsx'
+import { Loader } from './loader/Loader.jsx'
 
 function App() {
 	const { request } = useHttp()
@@ -43,7 +44,11 @@ function App() {
 	}, [])
 
 	if (loader) {
-		return <h1>Loader...</h1>
+		return (
+			<>
+				<Loader />
+			</>
+		)
 	}
 
 	return (

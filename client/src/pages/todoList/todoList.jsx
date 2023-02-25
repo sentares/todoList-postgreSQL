@@ -10,21 +10,16 @@ export const TodoList = () => {
 	const { logout } = React.useContext(AppContext)
 	const { request, loader } = useHttp()
 	const [todos, setTodos] = useState([])
+	const { user } = React.useContext(AppContext)
+	const id_user = user.id_user
 
 	const getTodo = async () => {
-		// const res = await fetch('http://localhost:4000/api/post')
-		// const {data} = await res.json()
 		const { data } = await request('/post')
 		setTodos(data)
 		return loader
 	}
 
 	const changeTodo = async (id_post, completed) => {
-		// await fetch('http://localhost:4000/api/post', {
-		// 	method: 'PUT',
-		// 	body: JSON.stringify({id_post, completed}),
-		// 	headers: {'Content-Type' : 'application/json'}
-		// })
 		await request('/post', 'PUT', { id_post, completed })
 		setTodos(todos.map(todo => (todo.id_post == id_post ? { ...todo, completed: !todo.completed } : todo)))
 	}
@@ -35,25 +30,24 @@ export const TodoList = () => {
 	}
 
 	const addTodo = async title => {
-		// await fetch('http://localhost:4000/api/post', {
-		// 	method: 'POST',
-		// 	body: JSON.stringify({title}),
-		// 	headers: {'Content-Type' : 'application/json'}
-		// })
 		await request('/post', 'POST', { title })
 		setTodos(prev => [
 			{
 				id_post: Date(),
 				title: title,
-				completed: false
+				completed: false,
+				id_user
 			},
 			...prev
 		])
+		console.log(id_user)
 	}
 
 	useEffect(() => {
 		getTodo()
 	}, [])
+
+	const nameOfUser = user.name.toUpperCase()
 
 	return (
 		<>
@@ -64,7 +58,7 @@ export const TodoList = () => {
 					</button>
 				</div>
 				<div className={styles.info}>
-					<h1 className={styles.text}>ToDo List</h1>
+					<h1 className={styles.text}>{nameOfUser}</h1>
 				</div>
 				<div className={styles.inputBlock}>
 					<NewTodo key={todos.id} addTodo={addTodo} />

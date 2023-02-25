@@ -22,9 +22,9 @@ class PostController {
 
 	async createPost(req, res) {
 		try {
-			const { title } = req.body
+			const { title, id_user } = req.body
 
-			const { rows } = await db.query(`insert into posts (title) values ('${title}') returning id_post`)
+			const { rows } = await db.query(`insert into posts (title, id_user) values ('${title}', ${id_user}) returning id_post`)
 
 			if (rows.length) {
 				const { id_post } = rows[0]

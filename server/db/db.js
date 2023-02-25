@@ -1,11 +1,11 @@
 const { Pool } = require('pg')
 
 const db = new Pool({
-	database: process.env.DB_NAME,
+	database: 'post' ,
 	port: Number(process.env.DB_POST),
 	host: process.env.DB_HOST,
-	user: process.env.DB_USER,
-	password: process.env.DB_PASSWORD
+	user: 'postgres',
+	password: 'qwerty'
 })
 db.connect(err => {
 	if (err) {
