@@ -3,7 +3,8 @@ const db = require('../db/db')
 class PostController {
 	async getPost(req, res) {
 		try {
-			const { rows } = await db.query('select * from posts')
+			const { id_user } = req.query
+			const { rows } = await db.query('select * from posts where id_user = $1', [id_user])
 
 			res.status(200).json({
 				message: 'Данные успешно получены',
@@ -28,7 +29,6 @@ class PostController {
 
 			if (rows.length) {
 				const { id_post } = rows[0]
-
 				return res.status(200).json({
 					message: 'Данные успешно сохранены',
 					type: 'success',

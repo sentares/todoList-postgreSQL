@@ -54,7 +54,7 @@ class AuthController {
 
 			if (rows.length) {
 				return res.status(303).json({
-					message: `Пользователь с такой ${email} эл.почтой уже регистрировон`,
+					message: `Пользователь с такой ${email} эл.почтой уже регистрирован`,
 					type: 'warn',
 					data: [],
 					register: false

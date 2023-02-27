@@ -13,8 +13,8 @@ export const TodoList = () => {
 	const { user } = React.useContext(AppContext)
 	const id_user = user.id_user
 
-	const getTodo = async () => {
-		const { data } = await request('/post')
+	const getTodo = async id_user => {
+		const { data } = await request(`/post?id_user=${id_user}`)
 		setTodos(data)
 		return loader
 	}
@@ -30,7 +30,7 @@ export const TodoList = () => {
 	}
 
 	const addTodo = async title => {
-		await request('/post', 'POST', { title })
+		await request('/post', 'POST', { title, id_user })
 		setTodos(prev => [
 			{
 				id_post: Date(),
@@ -44,7 +44,7 @@ export const TodoList = () => {
 	}
 
 	useEffect(() => {
-		getTodo()
+		getTodo(id_user)
 	}, [])
 
 	const nameOfUser = user.name.toUpperCase()

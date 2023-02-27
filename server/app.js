@@ -20,8 +20,6 @@ app.use(
 	})
 )
 
-console.log(process.env.SECRET_KEY)
-
 app.use('/api', require('./routes/index'))
 
 const server = http.createServer(app)

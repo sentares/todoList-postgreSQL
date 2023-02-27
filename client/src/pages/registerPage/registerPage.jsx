@@ -7,9 +7,6 @@ import { useHttp } from '../../hooks/useHttp.jsx'
 export const RegisterPage = () => {
 	const navigate = useNavigate()
 	const { request, loader } = useHttp()
-	const [name, setName] = useState('')
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
 
 	const [form, setForm] = useState({
 		email: '',
@@ -34,18 +31,6 @@ export const RegisterPage = () => {
 		}
 		toast.warn('Заполните пустые поля')
 	}
-
-	// const changeName = e => {
-	// 	setName(e.target.value)
-	// }
-
-	// const changeEmail = e => {
-	// 	setEmail(e.target.value)
-	// }
-
-	// const changePassword = e => {
-	// 	setPassword(e.target.value)
-	// }
 
 	const change = e => setForm({ ...form, [e.target.name]: e.target.value })
 

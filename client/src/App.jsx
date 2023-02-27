@@ -16,12 +16,16 @@ function App() {
 	})
 
 	const checkAuth = async () => {
-		const { data, accessToken } = await request('/auth/check')
-		if (accessToken.length) {
-			setUser(data)
-			setIsAuth(true)
+		try {
+			const { data, accessToken } = await request('/auth/check')
+			if (accessToken.length) {
+				setUser(data)
+				setIsAuth(true)
+			}
+			setLoader(false)
+		} catch (e) {
+			console.log(e)
 		}
-		setLoader(false)
 	}
 
 	const logout = async () => {
