@@ -20,6 +20,34 @@ class PostController {
 			})
 		}
 	}
+	async getSpecialPost(req, res) {
+		try {
+			const { id_post } = req.params
+
+			if (!id_post) {
+				return res.status(400).json({
+					message: 'Не указан id поста',
+					type: 'error',
+					data: []
+				})
+			}
+
+			const { rows } = await db.query('select * from posts where id_post = $1', [id_post])
+
+			res.status(200).json({
+				message: 'Данные успешно получены',
+				type: 'success',
+				data: rows
+			})
+		} catch (e) {
+			console.log(e)
+			res.status(500).json({
+				message: 'Ошибка в сервер',
+				type: 'error',
+				data: []
+			})
+		}
+	}
 
 	async createPost(req, res) {
 		try {
@@ -56,6 +84,27 @@ class PostController {
 			const { id_post, completed } = req.body
 
 			await db.query(`update posts set completed=${!completed} where id_post=${id_post}`)
+
+			res.status(201).json({
+				message: 'Данные успешно изменены',
+				type: 'success',
+				data: []
+			})
+		} catch (e) {
+			console.log(e)
+			res.status(500).json({
+				message: 'Ошибка в сервер',
+				type: 'error',
+				data: []
+			})
+		}
+	}
+
+	async updatePostTitle(req, res) {
+		try {
+			const { id_post } = req.params
+			const { title } = req.body
+			await db.query(`update posts set title='${title}' where id_post=${id_post}`)
 
 			res.status(201).json({
 				message: 'Данные успешно изменены',

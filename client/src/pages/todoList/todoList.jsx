@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NewTodo } from '../../components/newTodo/newTodo'
-import { TodoItem } from '../../components/todoItem.jsx/todoItem'
+import { TodoItem } from '../../components/todoItem/todoItem'
 import { useHttp } from '../../hooks/useHttp'
 import styles from './todolist.module.css'
 import { Loader } from '../../loader/Loader'

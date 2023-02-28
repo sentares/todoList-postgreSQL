@@ -1,8 +1,9 @@
-import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
-import { TodoList } from './todoList/todoList.jsx';
-import { LoginPage } from './loginPage/loginPage.jsx';
-import { RegisterPage } from './registerPage/registerPage.jsx';
+import React from 'react'
+import { Route, Routes, Navigate } from 'react-router-dom'
+import { TodoList } from './todoList/todoList.jsx'
+import { LoginPage } from './loginPage/loginPage.jsx'
+import { RegisterPage } from './registerPage/registerPage.jsx'
+import SpecialTodo from './specialTodo/SpecialTodo.jsx'
 
 const Router = ({ isAuth }) => {
 	if (isAuth) {
@@ -11,8 +12,9 @@ const Router = ({ isAuth }) => {
 				<Route path='/login' element={<Navigate replace to='/' />} />
 				<Route path='/register' element={<Navigate replace to='/' />} />
 				<Route path='/' element={<TodoList />} />
+				<Route path='/post/:id_post' element={<SpecialTodo />} />
 			</Routes>
-		);
+		)
 	}
 	return (
 		<Routes>
@@ -20,7 +22,7 @@ const Router = ({ isAuth }) => {
 			<Route path='/login' element={<LoginPage />} />
 			<Route path='/register' element={<RegisterPage />} />
 		</Routes>
-	);
-};
+	)
+}
 
-export default Router;
+export default Router

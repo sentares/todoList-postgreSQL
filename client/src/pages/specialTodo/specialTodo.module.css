@@ -1,0 +1,40 @@
+.specialItem {
+	height: 80vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 990px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.infoBlock {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 620px;
+	width: 100%;
+	font-size: 24px;
+	font-weight: 600;
+	padding: 10px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	box-shadow: -3px 3px 8px 0px rgba(87, 74, 74, 0.75);
+	-webkit-box-shadow: -3px 3px 8px 0px rgba(136, 130, 130, 0.75);
+	-moz-box-shadow: -3px 3px 8px 0px rgba(141, 116, 116, 0.75);
+	transition: all 0.2s ease-in-out;
+}
+
+.checkPoint {
+	color: rgb(240, 193, 104);
+	padding-right: 5px;
+	display: flex;
+	align-items: center;
+	font-size: 22px;
+	padding: 5px;
+	border-radius: 100%;
+}
+.checkPoint:hover {
+	color: rgb(0, 0, 0);
+	background-color: rgb(211, 119, 0);
+}
